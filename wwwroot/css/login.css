@@ -1,0 +1,77 @@
+@import "root.css";
+
+main {
+	height: 100%;
+}
+
+.d-flex {
+	height: inherit;
+	display: flex;
+}
+
+.d-flex div {
+	flex: 1;
+	height: 100% !important;
+}
+
+.d-flex div.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 25%;
+}
+
+.d-flex div:first-child {
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+		url("/images/loginbg.png") no-repeat;
+	background-size: cover;
+
+	align-content: center;
+}
+
+.d-flex div:first-child > p,
+.d-flex div:first-child > h1 {
+	display: inline;
+}
+
+.d-flex div.loginForm {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.d-flex div.loginForm > form {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	width: 50%;
+}
+
+.d-flex div.loginForm > form input {
+	padding: 10px;
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+	background-color: var(--secondary);
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.d-flex div.loginForm > form input[type="submit"] {
+	background-color: var(--primary);
+	color: var(--text);
+	font-size: 16px;
+	border-radius: 10px;
+	transition: all 0.1s ease-in-out;
+}
+
+.d-flex div.loginForm > form input[type="submit"]:active {
+	transition: all 0.1s ease-in-out;
+	background-color: var(--secondary);
+}
+
+.d-flex div.loginForm > form input:focus {
+	outline: 1px solid var(--primary);
+}
+.d-flex div.loginForm > form input[type="submit"]:hover {
+	cursor: pointer;
+}
