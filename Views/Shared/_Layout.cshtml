@@ -1,21 +1,23 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - fans</title>
+    <title>@ViewData["Title"] - Fans</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Fans.styles.css" asp-append-version="true" />
 </head>
+
 <body>
-    <div class="w-100 container">
-        <main role="w-100 main">
+
+    <div class="container">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <script src="~/lib/htmx.min.js"></script>
-    <script src="~/js/site.js"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
+
 </html>

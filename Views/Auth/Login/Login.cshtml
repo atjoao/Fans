@@ -1,0 +1,23 @@
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Entrar na conta";
+
+}
+
+<div class="d-flex">
+    <div class="side-1">
+        <div class="content">
+            <h1>Fans</h1>
+            <p>Apoia as tuas ventoinhas favoritas</p>
+        </div>
+    </div>
+    <div class="loginForm">
+        <form action="/auth/loginProc" method="post">
+            <p>Inicie sessão agora</p>
+            <input required type="email" name="email" id="email" placeholder="Email">
+            <input required type="password" name="password" id="password" placeholder="Password">
+            <input required type="submit" value="Entrar">
+            <p>Não tem conta? <a href="/auth/register">Registe-se</a></p>
+        </form>
+    </div>
+</div>

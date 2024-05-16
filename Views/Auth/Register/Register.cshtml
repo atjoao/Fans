@@ -1,0 +1,32 @@
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Criar conta";
+    var error = Context.Session.GetString("error");
+}
+
+<div class="d-flex">
+    <div class="side-1">
+        <div class="content">
+            <h1>Fans</h1>
+            <p>Apoia as tuas ventoinhas favoritas</p>
+        </div>
+    </div>
+
+    <div class="loginForm">
+        <form action="/auth/registerProc" method="post">
+            <p>Cria uma conta agora</p>
+            @if (error != null)
+            {
+                Context.Session.Remove("error");
+                <div class="error">
+                    <p>@error</p>
+                </div>
+            }
+            <input required type="text" name="username" id="username" placeholder="Nome de utilizador">
+            <input required type="email" name="email" id="email" placeholder="Email">
+            <input required type="password" name="password" id="password" placeholder="Password">
+            <input type="submit" value="Criar conta">
+            <p>Tens conta? <a href="/auth/login">Faz login</a></p>
+        </form>
+    </div>
+</div>

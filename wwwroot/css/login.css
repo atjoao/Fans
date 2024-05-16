@@ -11,7 +11,10 @@ main {
 
 .d-flex div {
 	flex: 1;
-	height: 100% !important;
+}
+
+.d-flex div.error {
+	flex: unset;
 }
 
 .d-flex div.content {
@@ -21,16 +24,19 @@ main {
 	padding: 0 25%;
 }
 
-.d-flex div:first-child {
-	background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+.d-flex .side-1 {
+	background: linear-gradient(0deg, var(--background-overlay), var(--background-overlay)),
 		url("/images/loginbg.png") no-repeat;
-	background-size: cover;
+
+	background-size: cover !important;
 
 	align-content: center;
+
+	display: flex;
 }
 
-.d-flex div:first-child > p,
-.d-flex div:first-child > h1 {
+.d-flex div:first-child>p,
+.d-flex div:first-child>h1 {
 	display: inline;
 }
 
@@ -40,14 +46,19 @@ main {
 	justify-content: center;
 }
 
-.d-flex div.loginForm > form {
+.d-flex div.loginForm>div {
+	background: unset;
+	display: inline;
+}
+
+.d-flex div.loginForm>form {
 	display: flex;
 	flex-direction: column;
 	gap: 25px;
 	width: 50%;
 }
 
-.d-flex div.loginForm > form input {
+.d-flex div.loginForm>form input {
 	padding: 10px;
 	border: 1px solid var(--primary);
 	border-radius: 5px;
@@ -56,22 +67,35 @@ main {
 	border-radius: 10px;
 }
 
-.d-flex div.loginForm > form input[type="submit"] {
+.d-flex div.loginForm>form input[type="submit"] {
 	background-color: var(--primary);
-	color: var(--text);
+	color: var(--textLight);
 	font-size: 16px;
 	border-radius: 10px;
 	transition: all 0.1s ease-in-out;
 }
 
-.d-flex div.loginForm > form input[type="submit"]:active {
+.d-flex div.loginForm>form input[type="submit"]:active {
 	transition: all 0.1s ease-in-out;
 	background-color: var(--secondary);
+	color: var(--tet);
 }
 
-.d-flex div.loginForm > form input:focus {
+.d-flex div.loginForm>form input:focus {
 	outline: 1px solid var(--primary);
 }
-.d-flex div.loginForm > form input[type="submit"]:hover {
+
+.d-flex div.loginForm>form input[type="submit"]:hover {
 	cursor: pointer;
+}
+
+.error {
+	padding: 10px;
+	background-color: var(--alert-bg);
+	border-radius: 10px;
+	border: 1px solid var(--alert-border-color);
+}
+
+.error p {
+	color: var(--alert-color);
 }
