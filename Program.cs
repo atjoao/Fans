@@ -32,7 +32,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseStaticFiles();
-
 app.UseSession();
 
 app.UseAuthorization();
