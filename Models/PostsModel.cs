@@ -6,15 +6,15 @@ namespace Fans.Models
 {
     public class Posts
     {
-
         [Key]
         public int PostId { get; private set; }
 
-        public User User { get; set; }
+        [Required]
+        public required User User { get; set; }
 
         [Required]
         [StringLength(280)]
-        public string Content { get; set; }
+        public required string Content { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -23,7 +23,7 @@ namespace Fans.Models
 
         public static int globalPostId;
 
-        //public Posts() { }
+        public Posts() { }
 
         public Posts(User user, string content)
         {

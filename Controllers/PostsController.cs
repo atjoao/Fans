@@ -12,9 +12,9 @@ namespace Fans.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly PostsContext _context;
+        private readonly AppDbContext _context;
 
-        public PostsController(PostsContext context)
+        public PostsController(AppDbContext context)
         {
             _context = context;
         }

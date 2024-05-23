@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Fans.Data;
 using Fans.Models;
-using NuGet.Protocol;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Fans.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly AppDbContext _context;
 
-        private readonly UserContext _context;
-
-        public AuthController(UserContext context)
+        public AuthController(AppDbContext context)
         {
             _context = context;
         }
@@ -26,7 +25,6 @@ namespace Fans.Controllers
             return View("Login/Login");
         }
 
-
         // GET: Auth/Register
         public IActionResult Register()
         {
@@ -39,133 +37,72 @@ namespace Fans.Controllers
 
         // POST: Auth/Register
         [HttpPost]
-        public ActionResult RegisterProc(
-            string username,
-            string email,
-            string password
-        )
+        public async Task<IActionResult> RegisterProc(string username, string email, string password)
         {
-            var session = this.HttpContext.Session;
-            try
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username))
             {
-                if (email == null || password == null || email == "" || password == "" || username == "" || username == null)
-                {
-                    session.SetString("error", "Os campos não podem estar vazios.");
-                    session.CommitAsync();
+                HttpContext.Session.SetString("error", "Os campos não podem estar vazios.");
+                return RedirectToAction("Register", "Auth");
+            }
 
-                    return RedirectToAction("Register", "Auth");
-                }
-
-                // check if session exists
-                if (session.GetString("user") != null)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-
-                // check if email and username are existent
-                var db = _context;
-                var _user = db.User.Where(u => u.Email == email).FirstOrDefault();
-                if (_user != null)
-                {
-                    session.SetString("error", "Este email já foi registado");
-                    session.CommitAsync();
-
-                    return RedirectToAction("Register", "Auth");
-                }
-
-                _user = db.User.Where(u => u.Username == username).FirstOrDefault();
-                if (_user != null)
-                {
-                    session.SetString("error", "Já existe um utilizador com este nome");
-                    session.CommitAsync();
-
-                    return RedirectToAction("Register", "Auth");
-                }
-
-                var _password = BCrypt.Net.BCrypt.HashPassword(password).ToString();
-
-                // this most likely will stop the thread from working idk
-                var user = new User(username, email, _password);
-                db.User.Add(user);
-                // deficiencia...
-                db.SaveChanges();
-
-                // create session // this needs to be parsed later aaaa
-                // have to find better way to create session array
-                // ill keep this for now
-                session.SetString("user", JsonSerializer.Serialize(user));
-                session.CommitAsync();
-
-
+            if (HttpContext.Session.GetString("user") != null)
+            {
                 return RedirectToAction("Index", "Home");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw new BadHttpRequestException("Não consegui completar o processo: " + ex.Message);
-            }
-        }
 
+            var existingUserByEmail = await _context.Users.FindAsync(email);
+            if (existingUserByEmail != null)
+            {
+                HttpContext.Session.SetString("error", "Este email já foi registado");
+                return RedirectToAction("Register", "Auth");
+            }
+
+            var existingUserByUsername = _context.Users.SingleOrDefault(u => u.Username == username);
+            if (existingUserByUsername != null)
+            {
+                HttpContext.Session.SetString("error", "Já existe um utilizador com este nome");
+                return RedirectToAction("Register", "Auth");
+            }
+
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            var user = new User(username, email, hashedPassword);
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            HttpContext.Session.SetString("user", JsonSerializer.Serialize(user));
+            return RedirectToAction("Index", "Home");
+        }
 
         // POST: Auth/LoginProc
         [HttpPost]
-        public ActionResult LoginProc(
-            string email, string password
-        )
+        public async Task<IActionResult> LoginProc(string username, string password)
         {
-            var session = HttpContext.Session;
-            try
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                if (email == null || password == null || email == "" || password == "")
-                {
-                    session.SetString("error", "Os campos não podem estar vazios.");
-                    session.CommitAsync();
+                HttpContext.Session.SetString("error", "Os campos não podem estar vazios.");
+                return RedirectToAction("Login", "Auth");
+            }
 
-                    return RedirectToAction("Login", "Auth");
-                }
-
-                // check if session exists
-                if (session.GetString("email") != null)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-
-                // check if email and password are correct
-                var db = _context;
-                var user = db.User.Where(u => u.Email == email).FirstOrDefault();
-                if (user == null)
-                {
-                    session.SetString("error", "Combinação de password ou email invalidos.");
-                    session.CommitAsync();
-
-                    return RedirectToAction("Login", "Auth");
-                }
-
-                var verify = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
-                if (!verify)
-                {
-                    session.SetString("error", "Combinação de password ou email invalidos.");
-                    session.CommitAsync();
-
-                    return RedirectToAction("Login", "Auth");
-                }
-
-                // set session
-                // nice static typing lmao
-                user = new User(user.Username, user.Email, user.PasswordHash);
-                // this will be a pain ita 
-                session.SetString("user", JsonSerializer.Serialize(user));
-                session.CommitAsync();
-
+            if (HttpContext.Session.GetString("user") != null)
+            {
                 return RedirectToAction("Index", "Home");
-
             }
-            catch (System.Exception)
+
+            var user = await _context.Users.FindAsync(username);
+            if (user == null){
+                HttpContext.Session.SetString("error", "Utilizador não existe.");
+                return RedirectToAction("Login", "Auth");
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             {
-                // throw bad request
-                throw new BadHttpRequestException("Não consegui completar o processo");
+                HttpContext.Session.SetString("error", "Combinação de password ou email inválidos.");
+                return RedirectToAction("Login", "Auth");
             }
-        }
 
+            HttpContext.Session.SetString("user", JsonSerializer.Serialize(user));
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

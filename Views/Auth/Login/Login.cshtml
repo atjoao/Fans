@@ -1,7 +1,7 @@
 @{
     Layout = "_AuthLayout";
     ViewData["Title"] = "Entrar na conta";
-
+    var error = Context.Session.GetString("error");
 }
 
 <div class="d-flex">
@@ -14,7 +14,14 @@
     <div class="loginForm">
         <form action="/auth/loginProc" method="post">
             <p>Inicie sessão agora</p>
-            <input required type="email" name="email" id="email" placeholder="Email">
+            @if (error != null)
+            {
+                Context.Session.Remove("error");
+                <div class="error">
+                    <p>@error</p>
+                </div>
+            }
+            <input required type="text" name="username" id="username" placeholder="Nome de utilizador">
             <input required type="password" name="password" id="password" placeholder="Password">
             <input required type="submit" value="Entrar">
             <p>Não tem conta? <a href="/auth/register">Registe-se</a></p>

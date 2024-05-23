@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Fans.Models;
-using Fans.Atributes;
+using Fans.Attributes;
 
 namespace Fans.Controllers;
 
