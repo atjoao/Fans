@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Fans.Attributes
 {
-    // Implementing IActionFilter interface
+    [AttributeUsage(AttributeTargets.All)]
     public class HasSession : Attribute, IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            // Check if session contains "User"
+            // Check if session contains "user"
             if (context.HttpContext.Session.GetString("user") == null)
             {
                 // Redirect to Login page if no session
@@ -16,9 +16,6 @@ namespace Fans.Attributes
             }
         }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-            // Do nothing after the action executes
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
     }
 }

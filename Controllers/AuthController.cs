@@ -25,6 +25,13 @@ namespace Fans.Controllers
             return View("Login/Login");
         }
 
+        // GET: Auth/Logout
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("user");
+            return RedirectToAction("Login", "Auth");
+        }
+
         // GET: Auth/Register
         public IActionResult Register()
         {
@@ -65,7 +72,7 @@ namespace Fans.Controllers
             }
 
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            var user = new User(username, email, hashedPassword);
+            var user = new User(username, email, hashedPassword, "");
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -90,7 +97,8 @@ namespace Fans.Controllers
             }
 
             var user = await _context.Users.FindAsync(username);
-            if (user == null){
+            if (user == null)
+            {
                 HttpContext.Session.SetString("error", "Utilizador não existe.");
                 return RedirectToAction("Login", "Auth");
             }

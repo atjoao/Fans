@@ -53,15 +53,16 @@ small {
 
 @media (prefers-color-scheme: light) {
 	:root {
+		--text: #0c0e1d;
+		--background: #e5e6f5;
+		--primary: #22275e;
+		--secondary: #8990d7;
+		--accent: #3640ab;
+
 		--text: #050316;
 		--textLight: #ebe9fc;
-		--background: #fbfbfe;
 
 		--background-overlay: rgba(251, 251, 254, 0.5);
-
-		--primary: #2f27ce;
-		--secondary: #dddbff;
-		--accent: #443dff;
 
 		--alert-color: #58151c;
 		--alert-bg: #f8d7da;
@@ -72,15 +73,17 @@ small {
 
 @media (prefers-color-scheme: dark) {
 	:root {
+		--text: #e1e3f3;
+		--background: #0a0b1a;
+
+		--primary: #a0a5dd;
+		--secondary: #282e75;
+		--accent: #555ec9;
+
 		--text: #ebe9fc;
 		--textLight: #ebe9fc;
 
-		--background: #010104;
 		--background-overlay: rgba(1, 1, 4, 0.5);
-
-		--primary: #3a31d8;
-		--secondary: #020024;
-		--accent: #0600c2;
 
 		--alert-color: #f8d7da;
 		--alert-bg: #58151c;
@@ -119,4 +122,8 @@ h4,
 h5,
 input {
 	color: var(--text);
+}
+
+ul {
+	list-style: none;
 }

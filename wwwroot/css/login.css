@@ -63,7 +63,7 @@ main {
 	border: 1px solid var(--primary);
 	border-radius: 5px;
 	background-color: var(--secondary);
-	font-size: 16px;
+	font-size: 16px !important;
 	border-radius: 10px;
 }
 

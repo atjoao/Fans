@@ -1,22 +1,61 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var user = ViewData["user"] as Fans.Models.User;
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Fans</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Fans.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
 </head>
 
 <body>
-
     <div class="container">
-        <main role="main">
+        <div class="side-1 border-side">
+            <div class="user-profile">
+                <div class="profile-content">
+                    <img width="64" height="64" src="https://picsum.photos/64/64" alt="">
+                    <div class="user-detail">
+                        <p>@user?.Username</p>
+                        <p>Descriçao</p>
+                    </div>
+                </div>
+                <object width="32" height="32" data="~/svg/exit.svg" type=""></object>
+            </div>
+            <menu>
+                <ul>
+                    <li>
+                        <object width="32" height="32" data="~/svg/home.svg" type=""></object>
+                        <a href="">Inicio</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <object width="32" height="32" data="~/svg/search.svg" type=""></object>
+                        <a href="">Pesquisar</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <object width="32" height="32" data="~/svg/bell.svg" type=""></object>
+                        <a href="">Notificações</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <object width="32" height="32" data="~/svg/settings.svg" type=""></object>
+                        <a href="">Definições</a>
+                    </li>
+                </ul>
+            </menu>
+        </div>
+        <div class="side-2">
             @RenderBody()
-        </main>
+        </div>
+        <div class="side-3 border-side">aaa</div>
     </div>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 
