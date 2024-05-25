@@ -48,6 +48,7 @@ namespace Fans.Migrations
             modelBuilder.Entity("Fans.Models.User", b =>
                 {
                     b.Property<string>("Username")
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -55,6 +56,10 @@ namespace Fans.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfileDescription")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -18,14 +18,7 @@ public class HomeController : Controller
     [HasSession]
     public IActionResult Index()
     {
-        var user = HttpContext.Session.GetString("user");
-        if (user != null)
-        {
-            var json_user = JsonSerializer.Deserialize<User>(user);
-            ViewData["user"] = json_user;
-        }
         return View();
-
     }
 
     public IActionResult Privacy()

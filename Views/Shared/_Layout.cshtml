@@ -1,5 +1,12 @@
 ﻿@{
-    var user = ViewData["user"] as Fans.Models.User;
+    var user = Context.Items["user"] as Fans.Models.User;
+    var currentPath = Context.Request.Path;
+    string IsActive(string path) {
+        if(string.Equals(currentPath, path, StringComparison.OrdinalIgnoreCase)){
+            return "active";
+        }
+        return "";
+    };
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -19,35 +26,61 @@
                     <img width="64" height="64" src="https://picsum.photos/64/64" alt="">
                     <div class="user-detail">
                         <p>@user?.Username</p>
-                        <p>Descriçao</p>
+                        @if (!string.IsNullOrEmpty(user?.ProfileDescription))
+                        {
+                            <p>@user.ProfileDescription</p>
+                        }
                     </div>
                 </div>
-                <object width="32" height="32" data="~/svg/exit.svg" type=""></object>
+                <svg width="32" height="32" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 3)">
+                        <path d="m10.595 10.5 2.905-3-2.905-3"/>
+                        <path d="m13.5 7.5h-9"/>
+                        <path d="m10.5.5-8 .00224609c-1.1043501.00087167-1.9994384.89621131-2 2.00056153v9.99438478c0 1.1045695.8954305 2 2 2h8.0954792"/>
+                    </g>
+                </svg>
             </div>
             <menu>
-                <ul>
-                    <li>
-                        <object width="32" height="32" data="~/svg/home.svg" type=""></object>
-                        <a href="">Inicio</a>
-                    </li>
+                
+                <ul class="@IsActive("/")">
+                    <a href="">
+                        <li>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 10L19 20H9M5 20L5 10L12 3L15.5 6.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Inicio
+                        </li>
+                    </a>
                 </ul>
                 <ul>
-                    <li>
-                        <object width="32" height="32" data="~/svg/search.svg" type=""></object>
-                        <a href="">Pesquisar</a>
-                    </li>
+                    <a href="">
+                        <li>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 20L15.8033 15.8033C15.8033 15.8033 14 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5C18 11.0137 17.9484 11.5153 17.85 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Pesquisar
+                        </li>
+                    </a>
                 </ul>
                 <ul>
-                    <li>
-                        <object width="32" height="32" data="~/svg/bell.svg" type=""></object>
-                        <a href="">Notificações</a>
-                    </li>
+                    <a href="">
+                        <li>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 17V18C15 18.394 14.9224 18.7841 14.7716 19.1481C14.6209 19.512 14.3999 19.8427 14.1213 20.1213C13.8427 20.3999 13.512 20.6209 13.1481 20.7716C12.7841 20.9224 12.394 21 12 21C11.606 21 11.2159 20.9224 10.8519 20.7716C10.488 20.6209 10.1573 20.3999 9.87868 20.1213C9.6001 19.8427 9.37913 19.512 9.22836 19.1481C9.0776 18.7841 9 18.394 9 18V17H20C20 17 18 12 18 9M15 3.82461C14.1129 3.30174 13.0861 3 12 3C8.732 3 6 5.732 6 9C6 13 4 17 4 17H6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Notificações
+                        </li>
+                    </a>
                 </ul>
                 <ul>
-                    <li>
-                        <object width="32" height="32" data="~/svg/settings.svg" type=""></object>
-                        <a href="">Definições</a>
-                    </li>
+                    <a href="">
+                        <li>
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 4V4.56879C14 4.99659 14.2871 5.36825 14.6822 5.53228C15.0775 5.69638 15.5377 5.63384 15.8403 5.33123L16.2426 4.92891C16.6331 4.53838 17.2663 4.53838 17.6568 4.92891L19.071 6.34312C19.4616 6.73365 19.4616 7.36681 19.071 7.75734L18.6688 8.1596C18.3661 8.46223 18.3036 8.92247 18.4677 9.31774C18.6317 9.71287 19.0034 10 19.4313 10L20 10C20.5523 10 21 10.4477 21 11V13C21 13.5523 20.5523 14 20 14H19.4312C19.0034 14 18.6318 14.2871 18.4677 14.6822C18.3036 15.0775 18.3661 15.5377 18.6688 15.8403L19.071 16.2426M4.92889 17.6568C4.53837 17.2663 4.53837 16.6331 4.92889 16.2426L5.33123 15.8403C5.63384 15.5377 5.69638 15.0775 5.53228 14.6822C5.36825 14.2871 4.99659 14 4.56879 14H4C3.44772 14 3 13.5523 3 13V11C3 10.4477 3.44772 10 4 10L4.56877 10C4.99658 10 5.36825 9.71288 5.53229 9.31776C5.6964 8.9225 5.63386 8.46229 5.33123 8.15966L4.92891 7.75734C4.53838 7.36681 4.53838 6.73365 4.92891 6.34313L6.34312 4.92891C6.73365 4.53839 7.36681 4.53839 7.75734 4.92891L8.15966 5.33123C8.46228 5.63386 8.9225 5.6964 9.31776 5.53229C9.71288 5.36825 10 4.99658 10 4.56876V4C10 3.44772 10.4477 3 11 3M8.15955 18.6688C8.46218 18.3661 8.92242 18.3036 9.31769 18.4677C9.71282 18.6317 9.99995 19.0034 9.99995 19.4313V20C9.99995 20.5523 10.4477 21 10.9999 21H12.9999C13.5522 21 13.9999 20.5523 13.9999 20V19.4312C13.9999 19.0034 14.2871 18.6317 14.6822 18.4677C15.0774 18.3036 15.5377 18.3661 15.8403 18.6688L16.2426 19.071C16.6331 19.4616 17.2663 19.4616 17.6568 19.071M14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Definições
+                        </li>
+                    </a>
                 </ul>
             </menu>
         </div>

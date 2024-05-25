@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fans.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240523221738_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240525130843_db_alter")]
+    partial class db_alter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,7 @@ namespace Fans.Migrations
             modelBuilder.Entity("Fans.Models.User", b =>
                 {
                     b.Property<string>("Username")
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -62,6 +63,7 @@ namespace Fans.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProfileDescription")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Username");

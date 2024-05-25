@@ -2,9 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Fans.Models;
 
-public class User(string username, string email, string passwordHash, string desc)
+public class User(string username, string email, string passwordHash, string ProfileDescription)
 {
     [Key]
+    [MaxLength(20)]
     public string Username { get; set; } = username;
 
     [Required]
@@ -13,5 +14,5 @@ public class User(string username, string email, string passwordHash, string des
     [Required]
     public string PasswordHash { get; set; } = passwordHash;
 
-    public string Desc { get; set; } = desc ?? "Descrição de utilizador";
+    public string ProfileDescription { get; set; } = ProfileDescription ?? "";
 }
