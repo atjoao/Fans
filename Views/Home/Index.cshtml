@@ -1,8 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Fans.Models.Posts>
+@{
+    ViewData["Title"] = "Início";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/posts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+<section id="posts">
+    <!-- render posts !-->
+    <section id="posts">
+        @if (Model.Count() <= 0)
+        {
+            @await Component.InvokeAsync("ViewPost", new { PostId = 1 })
+        }
+        else
+        {
+            @foreach (var post in Model)
+            {
+
+            }
+        }
+
+    </section>
+</section>

@@ -11,12 +11,12 @@ namespace Fans.Attributes
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var user = context.HttpContext.Session.GetString("user");
-            if ( user == null)
+            if (user == null)
             {
                 // Redirect to Login page if no session
                 context.Result = new RedirectToActionResult("Login", "Auth", null);
             }
-            // add user to ViewData (or HttpContext.Items yk)
+            // add user to ViewData (or HttpContext.Items idk wtf i am writing)
             else
             {
                 var json_user = JsonSerializer.Deserialize<User>(user);

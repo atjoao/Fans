@@ -1,0 +1,36 @@
+.post-container {
+    display: flex;
+    border-radius: 10px;
+    gap: 10px;
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px;
+    padding: 10px;
+}
+
+.post-container>img {
+    border-radius: 50%;
+}
+
+.post-body .post-content img {
+    object-fit: cover;
+    height: 250px;
+    max-width: 512px;
+    max-height: 500px;
+    object-position: 50% 50%;
+    border-radius: 10px;
+    border: 1px solid var(--text);
+}
+
+.post-content p {
+    padding: 0 0 15px 0;
+}
+
+.post-social {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.post-social>span {
+    cursor: pointer;
+}

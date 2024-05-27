@@ -51,6 +51,11 @@ small {
 	/* 12px */
 }
 
+/* global variables */
+:root {
+	--border-size-px: 50px;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		--text: #0c0e1d;

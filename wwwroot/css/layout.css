@@ -3,38 +3,40 @@ body state layouts
 */
 @import "root.css";
 
-body > .container {
+body>.container {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
 	height: 100%;
 }
 
-body > .container .border-side {
+body>.container .border-side {
 	background-color: var(--secondary);
 	flex: 0.2;
 }
 
-body > .container .side-1 {
+body>.container .side-1 {
 	border-radius: 0px 20px 20px 0px;
 	padding: 20px;
 
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	margin: 0px var(--border-size-px) 0px 0px;
 }
 
-body > .container .side-3 {
+body>.container .side-3 {
 	border-radius: 20px 0px 0px 20px;
 	padding: 20px;
+	margin: 0px 0px 0px var(--border-size-px);
 }
 
-body > .container .side-2 {
+body>.container .side-2 {
 	flex: 0.8;
-	margin: 0 30px;
+	margin: 10px 0px;
 }
 
-.user-profile > * {
+.user-profile>* {
 	display: flex;
 	gap: 15px;
 }
@@ -71,32 +73,19 @@ menu {
 }
 
 menu ul {
-	background-color: v;
-}
-
-menu ul {
 	background-color: var(--background);
 	border-radius: 10px;
 	padding: 10px;
-}
-
-menu ul a {
-	color: var(--text);
-	text-decoration: none;
 }
 
 menu ul.active {
 	background-color: var(--accent);
 }
 
-/* menu ul a:hover {
-	color: var(--primary);
+menu ul a {
+	color: var(--text);
+	text-decoration: none;
 }
-
-menu ul a:hover svg,
-menu ul a:hover .user-profile svg g {
-	stroke: var(--primary);
-} */
 
 menu ul:hover {
 	background-color: var(--accent);
@@ -111,4 +100,25 @@ menu ul li {
 menu ul li svg,
 .user-profile svg g {
 	stroke: var(--text);
+}
+
+@media (prefers-color-scheme: light) {
+	menu ul.active a {
+		color: white;
+	}
+
+	menu ul.active li svg {
+		stroke: white;
+		transition: all .2s ease-in-out;
+	}
+
+	menu ul:hover li svg {
+		stroke: white;
+		transition: all .2s ease-in-out;
+	}
+
+	menu ul:hover li {
+		color: white;
+		transition: all .2s ease-in-out;
+	}
 }
