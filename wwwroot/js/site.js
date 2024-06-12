@@ -69,10 +69,7 @@ function inputCheck(e) {
         return;
     }
 
-    if (currentLength > 1024) {
-        e.preventDefault();
-        return;
-    } else {
+    if (!currentLength > 1024) {
         counterSpan.innerText = currentLength + "/1024";
     }
 }
