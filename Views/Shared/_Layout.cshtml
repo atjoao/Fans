@@ -28,7 +28,7 @@
                 <div class="profile-content">
                     <img width="64" height="64" src="https://picsum.photos/64/64" alt="">
                     <div class="user-detail">
-                        <p>@user?.Username</p>
+                        <p>&commat;@user?.Username</p>
                         @if (!string.IsNullOrEmpty(user?.ProfileDescription))
                         {
                             <p>@user.ProfileDescription</p>
@@ -104,10 +104,24 @@
         </div>
         <div class="side-2">
             @RenderBody()
+            <div class="newPost">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <g>
+
+                        <line fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12"
+                            x2="12" y1="19" y2="5" />
+
+                        <line fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19"
+                            y1="12" y2="12" />
+                    </g>
+                </svg>
+            </div>
         </div>
         <div class="side-3 border-side">aaa</div>
     </div>
+    <script src="~/lib/htmx.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
 </body>
 
 </html>

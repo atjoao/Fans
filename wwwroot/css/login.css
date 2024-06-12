@@ -64,11 +64,12 @@ main {
 	border-radius: 5px;
 	font-size: 16px !important;
 	border-radius: 10px;
+	background-color: transparent;
 }
 
 .d-flex div.loginForm>form input[type="submit"] {
 	background-color: var(--primary);
-	color: var(--textLight);
+	color: var(--text);
 	font-size: 16px;
 	border-radius: 10px;
 	transition: all 0.1s ease-in-out;
@@ -77,11 +78,23 @@ main {
 .d-flex div.loginForm>form input[type="submit"]:active {
 	transition: all 0.1s ease-in-out;
 	background-color: var(--secondary);
-	color: var(--tet);
+	color: var(--text);
 }
 
 .d-flex div.loginForm>form input:focus {
 	outline: 1px solid var(--primary);
+}
+
+@media (prefers-color-scheme: dark) {
+	.d-flex div.loginForm>form input[type="submit"] {
+		color: #000;
+	}
+
+	.d-flex div.loginForm>form input[type="submit"]:active {
+		transition: all 0.1s ease-in-out;
+		background-color: var(--secondary);
+		color: var(--text);
+	}
 }
 
 .d-flex div.loginForm>form input[type="submit"]:hover {

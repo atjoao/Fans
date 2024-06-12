@@ -18,15 +18,9 @@ public class HomeController : Controller
         _context = context;
     }
 
+    // GET : /
     [HasSession]
     public IActionResult Index()
-    {
-        // get posts
-        var posts = _context.Posts.ToList();
-        return View(posts);
-    }
-
-    public IActionResult Privacy()
     {
         return View();
     }

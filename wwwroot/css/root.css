@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Palanquin:700|Palanquin:400");
+@import url("https://fonts.googleapis.com/css?family=Palanquin");
+
+* {
+	box-sizing: border-box !important;
+	padding: 0;
+	margin: 0;
+}
 
 body {
 	font-family: "Palanquin";
@@ -53,7 +59,7 @@ small {
 
 /* global variables */
 :root {
-	--border-size-px: 50px;
+	--border-size-px: 0px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -97,11 +103,6 @@ small {
 	}
 }
 
-* {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-}
 
 html {
 	overflow: hidden;
@@ -112,11 +113,6 @@ body {
 	max-width: 100vw;
 	height: 100%;
 	background-color: var(--background);
-}
-
-body {
-	overflow-x: hidden;
-	overflow-y: auto;
 }
 
 p,
@@ -131,4 +127,14 @@ input {
 
 ul {
 	list-style: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: #ffffff;
+	transition: background-color 5000s ease-in-out 0s;
+	box-shadow: inset 0 0 20px 20px var(--background-overlay);
 }

@@ -3,8 +3,13 @@
     border-radius: 10px;
     gap: 10px;
 
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px;
-    padding: 10px;
+    padding: 10px 100px;
+}
+
+.post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .post-container>img {
@@ -25,12 +30,70 @@
     padding: 0 0 15px 0;
 }
 
-.post-social {
+.post-interaction {
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
 
-.post-social>span {
+.post-interaction>span {
     cursor: pointer;
+    color: var(--text);
+}
+
+.post-interaction>span>svg {
+    stroke: var(--text);
+}
+
+.post-create-container {
+    width: 100%;
+    padding: 10px 100px;
+    display: flex;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.post-create-container img {
+    border-radius: 50%;
+}
+
+.post-create-container .post-create-body {
+    flex: 1;
+}
+
+.post-create-container>.post-create-body div#postContent {
+    position: relative;
+    min-height: 55px;
+    max-height: 100px;
+
+    width: 100%;
+    text-align: left;
+    overflow-x: hidden;
+
+    word-break: break-word;
+    color: var(--text);
+}
+
+.post-create-container .post-content-container {
+    position: relative;
+}
+
+.post-create-container .counter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    color: white;
+}
+
+.post-create-container .post-create-buttons {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-create-buttons span svg g line,
+.post-create-buttons span#sendPost svg path {
+    stroke: var(--text);
 }

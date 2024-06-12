@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Fans.Data;
+using Fans.Attributes;
 
 namespace Fans.Controllers
 {
@@ -10,6 +11,20 @@ namespace Fans.Controllers
         public PostsController(AppDbContext context)
         {
             _context = context;
+        }
+
+        // GET: /posts
+        [HasSession]
+        public IActionResult Index()
+        {
+            var posts = _context.Posts.ToList();
+            return View(posts);
+        }
+
+        [HasSession]
+        public IActionResult Create()
+        {
+            return View();
         }
 
     }

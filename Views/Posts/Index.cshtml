@@ -1,0 +1,17 @@
+@model IEnumerable<Fans.Models.Posts>
+@{
+    Layout = null;
+}
+<!-- this should be doing the post rendering -->
+@if (Model.Count() <= 0)
+{
+    <p>Este é um post de teste</p>
+    @await Component.InvokeAsync("ViewPost", new { PostId = 1 })
+}
+else
+{
+    @foreach (var post in Model)
+    {
+        @await Component.InvokeAsync("ViewPost", new { PostId = post.PostId })
+    }
+}
