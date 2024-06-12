@@ -22,8 +22,6 @@
     max-width: 512px;
     max-height: 500px;
     object-position: 50% 50%;
-    border-radius: 10px;
-    border: 1px solid var(--text);
 }
 
 .post-content p {

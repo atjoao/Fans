@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /*
+    instagram like caroosel
+    show only one image
+    */
+    body>div {
+        position: relative;
+        width: 512px;
+        height: 512px;
+        overflow: hidden;
+        align-items: center;
+        display: flex;
+    }
+
+    .post-attachments {
+        display: flex;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        width: 512px;
+
+        overflow-x: hidden;
+    }
+
+    .brn {
+        position: absolute;
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+    }
+</style>
+
+<body>
+    <div>
+        <div class="brn">
+            <button>></button>
+            <button>
+                < </button>
+        </div>
+        <div class="post-attachments">
+            <img src="https://picsum.photos/512/512" alt="">
+            <img src="https://picsum.photos/512/512" alt="">
+            <img src="https://picsum.photos/512/512" alt="">
+        </div>
+
+        <div class="post-bubble"></div>
+
+    </div>
+</body>
+
+<script>
+    const postBubble = document.querySelector('.post-bubble');
+    const postAttachments = document.querySelector('.post-attachments');
+    const next = document.querySelector('button:nth-of-type(1)');
+    const prev = document.querySelector('button:nth-of-type(2)');
+
+    let currentImage = 0;
+    // change image
+
+    next.addEventListener('click', () => {
+        currentImage++;
+        postAttachments.scrollBy((currentImage == 0 ? 512 : 1) * 512, 0);
+    });
+
+    prev.addEventListener('click', () => {
+        currentImage--;
+        postAttachments.scrollBy((currentImage == 0 ? 512 : 1) * -512, 0);
+    });
+
+</script>
+
+</html>
