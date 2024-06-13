@@ -94,11 +94,7 @@ function keydownCheck(e) {
         e.preventDefault();
         return;
     }
-
-
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     // after page being fully loaded store div
